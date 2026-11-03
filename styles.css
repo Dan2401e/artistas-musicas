@@ -1,0 +1,586 @@
+/* =============================================
+   SISTEMA MUSICAL — Folha de Estilos Principal
+   =============================================
+   Este arquivo cresce ao longo do roteiro. A cada
+   etapa acrescentamos só o CSS da tela que acabamos
+   de construir. As seções abaixo (variáveis, reset,
+   layout) são a base que toda tela do sistema usa.
+============================================= */
+
+
+/* -----------------------------------------------
+   1. VARIÁVEIS E RESET
+----------------------------------------------- */
+:root {
+    --primary:     #2c3e50;
+    --blue:        #3498db;
+    --blue-dark:   #2980b9;
+    --green:       #27ae60;
+    --red:         #e74c3c;
+    --red-dark:    #c0392b;
+    --bg:          #f0f2f5;
+    --surface:     #ffffff;
+    --border:      #dde1e7;
+    --text:        #2c3e50;
+    --text-muted:  #6c757d;
+    --shadow-sm:   0 1px 3px rgba(0,0,0,.08);
+    --shadow-md:   0 4px 12px rgba(0,0,0,.10);
+    --radius:      8px;
+    --font:        'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font);
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+
+/* -----------------------------------------------
+   2. FORMULÁRIOS (base — todas as telas com <form>
+      vão reaproveitar estas regras)
+----------------------------------------------- */
+form {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+label {
+    display: block;
+    margin-bottom: .4rem;
+    font-size: .9rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+input[type="text"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: .65rem .85rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: .95rem;
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--surface);
+    transition: border-color .2s, box-shadow .2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(52,152,219,.15);
+}
+
+
+/* -----------------------------------------------
+   3. BOTÕES (por enquanto só o botão primário —
+      os outros botões (.btn-edit, .btn-delete...)
+      entram no seletor abaixo quando aparecerem
+      nas próximas telas)
+----------------------------------------------- */
+.btn-primary,
+.btn-edit,
+.btn-delete,
+.btn-music,
+.btn-back,
+.btn-youtube {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .35rem;
+    padding: .55rem 1.1rem;
+    border: none;
+    border-radius: 6px;
+    font-size: .875rem;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color .2s, transform .15s, box-shadow .2s;
+    line-height: 1.4;
+}
+
+.btn-primary {
+    padding: .65rem 1.4rem;
+    font-size: .95rem;
+    background: var(--blue);
+    color: #fff;
+}
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+
+.btn-back        { background: var(--primary); color: #fff; }
+.btn-back:hover  { background: #1a252f; }
+
+/* E acrescente as cores específicas de cada botão novo: */
+.btn-edit           { background: var(--blue);  color: #fff; }
+.btn-edit:hover      { background: var(--blue-dark); }
+.btn-delete         { background: var(--red);   color: #fff; }
+.btn-delete:hover    { background: var(--red-dark); }
+.btn-music          { background: var(--green); color: #fff; }
+.btn-music:hover     { background: #219a52; }
+.btn-youtube        { background: #ff0000; color: #fff; }
+.btn-youtube:hover  { background: #cc0000; }
+
+
+/* -----------------------------------------------
+   4. COMPONENTES DE MENSAGEM (login já usa a dica
+      de credenciais; a estrutura .message genérica
+      será usada por outras telas na Fase 2)
+----------------------------------------------- */
+.message {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    padding: .85rem 1.1rem;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
+    font-size: .95rem;
+    font-weight: 500;
+}
+
+.message.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.message.error   { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+
+/* -----------------------------------------------
+   5. TELA DE LOGIN (específico desta tela)
+----------------------------------------------- */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg);
+    padding: 1rem;
+}
+
+.login-card {
+    background: var(--surface);
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-card form {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 1.75rem;
+}
+
+.login-header h1 {
+    font-size: 1.6rem;
+    color: var(--primary);
+    margin-bottom: .25rem;
+}
+
+.login-header p {
+    color: var(--text-muted);
+    font-size: .9rem;
+}
+
+.login-card .btn-primary {
+    width: 100%;
+    margin-top: .25rem;
+}
+
+.login-hint {
+    margin-top: 1.25rem;
+    padding: .75rem 1rem;
+    background: var(--bg);
+    border-radius: 6px;
+    text-align: center;
+    font-size: .82rem;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+}
+
+.login-hint code {
+    background: #e9ecef;
+    padding: .1rem .35rem;
+    border-radius: 3px;
+    font-size: .8rem;
+}
+
+/* -----------------------------------------------
+   6. LAYOUT BASE (container usado por todas as
+      telas a partir de agora, exceto o login)
+----------------------------------------------- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 32px;
+}
+
+
+/* -----------------------------------------------
+   7. MENU PRINCIPAL (específico desta tela)
+----------------------------------------------- */
+.topbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.page-header h1 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: .35rem;
+}
+
+.page-header p { color: var(--text-muted); font-size: 1rem; }
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.menu-card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    transition: transform .2s, box-shadow .2s;
+    border: 1px solid var(--border);
+}
+
+.menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,.13);
+}
+
+.menu-card a {
+    display: block;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--text);
+}
+
+.menu-card-icon  { font-size: 2.2rem; margin-bottom: .75rem; }
+.menu-card-title { font-size: 1.05rem; font-weight: 600; color: var(--primary); margin-bottom: .35rem; }
+.menu-card-desc  { font-size: .85rem; color: var(--text-muted); }
+
+/* -----------------------------------------------
+   8. TIPOGRAFIA (h2/h3 aparecem a partir desta tela)
+----------------------------------------------- */
+h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: .75rem;
+    border-bottom: 2px solid var(--border);
+}
+
+h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin: 2rem 0 1rem;
+}
+
+
+/* -----------------------------------------------
+   9. CABEÇALHO DE PÁGINA COM AÇÕES
+----------------------------------------------- */
+.page-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: .75rem;
+    border-bottom: 2px solid var(--border);
+    flex-wrap: wrap;
+}
+
+.page-header-bar h2 {
+    margin: 0;
+    padding: 0;
+    border: none;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.page-header-bar .header-actions {
+    display: flex;
+    gap: .6rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+/* -----------------------------------------------
+   10. FORMULÁRIO EM GRADE (2 colunas)
+----------------------------------------------- */
+input[type="number"],
+input[type="url"],
+input[type="date"] {
+    width: 100%;
+    padding: .65rem .85rem;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: .95rem;
+    font-family: var(--font);
+    color: var(--text);
+    background: var(--surface);
+    transition: border-color .2s, box-shadow .2s;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: .5rem;
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    font-size: .9rem;
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+small {
+    display: block;
+    margin-top: .3rem;
+    font-size: .8rem;
+    color: var(--text-muted);
+}
+
+/* Grid de 2 colunas para formulários */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 2rem;
+}
+
+/* Campo que ocupa as 2 colunas inteiras (usado na Etapa 8, para a letra da música) */
+.form-grid .form-group.full {
+    grid-column: 1 / -1;
+}
+
+/* Grupo de botões abaixo do form */
+.form-actions {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: .5rem;
+    grid-column: 1 / -1;
+}
+
+/* Imagem atual (será usada na Fase 2, ao editar um artista/música com foto já salva) */
+.current-image {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    margin-top: .75rem;
+    padding: .75rem;
+    background: var(--bg);
+    border-radius: 6px;
+}
+
+.current-image img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+
+.current-image small {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+/* -----------------------------------------------
+   11. TABELAS
+----------------------------------------------- */
+.table-container {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border);
+}
+
+th {
+    background: var(--primary);
+    color: #fff;
+    font-size: .82rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover { background: #f8fafc; }
+
+.col-foto,
+.col-capa    { width: 90px;  white-space: nowrap; }
+.col-youtube { width: 110px; white-space: nowrap; }
+.col-acoes   { white-space: nowrap; }
+
+.action-buttons {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.table-thumbnail {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    display: block;
+}
+
+.no-image {
+    width: 60px;
+    height: 60px;
+    background: var(--bg);
+    border: 1.5px dashed var(--border);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .7rem;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.2;
+}
+
+td.empty-cell {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 2rem;
+    font-size: .95rem;
+}
+
+/* -----------------------------------------------
+   14. FILTROS
+----------------------------------------------- */
+.filters {
+    background: var(--surface);
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border);
+}
+
+.filter-group {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.filter-item {
+    flex: 1;
+    min-width: 180px;
+}
+
+.filter-item label {
+    font-size: .82rem;
+}
+
+.filter-actions {
+    display: flex;
+    gap: .75rem;
+    align-items: center;
+}
+
+
+/* -----------------------------------------------
+   15. UTILITÁRIOS
+----------------------------------------------- */
+.text-center { text-align: center; }
+.text-muted  { color: var(--text-muted); font-size: .9rem; }
+
+.mt-1 { margin-top: .5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-1 { margin-bottom: .5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+
+/* -----------------------------------------------
+   16. RESPONSIVIDADE (ajusta todas as telas juntas,
+       agora que todas já existem)
+----------------------------------------------- */
+@media (max-width: 768px) {
+    .container { padding: 16px; }
+    h2 { font-size: 1.4rem; }
+    form { padding: 1.25rem; }
+    .form-grid { grid-template-columns: 1fr; }
+    .filter-group   { flex-direction: column; gap: .75rem; }
+    .filter-item    { min-width: 100%; }
+    .table-container { overflow-x: auto; }
+    table            { min-width: 560px; }
+    th, td { padding: 10px 12px; font-size: .85rem; }
+    .table-thumbnail,
+    .no-image { width: 48px; height: 48px; }
+    .col-foto, .col-capa { width: 68px; }
+    .action-buttons { flex-wrap: wrap; gap: 4px; }
+    .btn-edit, .btn-delete, .btn-music, .btn-youtube {
+        padding: .4rem .7rem;
+        font-size: .78rem;
+    }
+    .menu-grid { grid-template-columns: 1fr; }
+}
+
